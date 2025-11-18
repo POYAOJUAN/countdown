@@ -1,46 +1,44 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Countdown</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 10px;
-        font-family: sans-serif;
-        background: #000;
-        color: #fff;
-        font-size: 18px;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="count"></div>
+<html>
 
-    <script>
-      const deadline = new Date("2026-01-01T23:59:59+08:00").getTime();
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui;
+      background: #222;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50px;
+    }
+  </style>
+</head>
 
-      function tick() {
-        const now = Date.now();
-        const diff = Math.max(0, deadline - now);
+<body>
+  <div id="countdown"></div>
 
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const mins = Math.floor((diff / (1000 * 60)) % 60);
-        const secs = Math.floor((diff / 1000) % 60);
+  <script>
+    const deadline = new Date("2025-12-31T23:59:59+08:00").getTime();
 
-        const el = document.getElementById("count");
-        el.textContent = `倒數：${days}天 ${hours}時 ${mins}分 ${secs}秒`;
+    function tick() {
+      const now = Date.now();
+      const diff = Math.max(0, deadline - now);
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const mins = Math.floor((diff / (1000 * 60)) % 60);
+      const secs = Math.floor((diff / 1000) % 60);
 
-        if (diff === 0) {
-          clearInterval(timer);
-          el.textContent = "活動已結束";
-        }
-      }
+      document.getElementById("countdown").textContent =
+        `倒數：${days}天 ${hours}時 ${mins}分 ${secs}秒`;
+    }
 
-      tick();
-      const timer = setInterval(tick, 1000);
-    </script>
-  </body>
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>
+
 </html>
